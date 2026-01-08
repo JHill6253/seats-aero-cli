@@ -7,7 +7,6 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/JHill6253/seats-aero-cli/internal/config"
-	"github.com/JHill6253/seats-aero-cli/internal/tui"
 )
 
 var (
@@ -18,21 +17,21 @@ var (
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "seats",
-	Short: "CLI and TUI for seats.aero award flight search",
-	Long: `seats is a command-line interface and terminal UI for searching
-award flight availability using the seats.aero API.
+	Short: "CLI for seats.aero award flight search",
+	Long: `seats is a command-line interface for searching award flight
+availability using the seats.aero API.
 
-Run without arguments to launch the interactive TUI, or use subcommands
-for direct CLI access.
+Run without arguments to launch the interactive guided mode, or use
+subcommands for direct CLI access.
 
 Examples:
-  seats                                    # Launch TUI
+  seats                                    # Interactive guided mode
   seats search --from SFO --to NRT         # Search flights
   seats availability --source aeroplan     # Bulk availability
   seats routes --source united             # List routes`,
 	Run: func(cmd *cobra.Command, args []string) {
-		// Default behavior: launch TUI
-		if err := runTUI(); err != nil {
+		// Default behavior: launch guided CLI
+		if err := runGuided(); err != nil {
 			fmt.Fprintf(os.Stderr, "Error: %v\n", err)
 			os.Exit(1)
 		}
@@ -65,7 +64,7 @@ func GetConfig() *config.Config {
 	return cfg
 }
 
-func runTUI() error {
+func runGuided() error {
 	if cfg == nil {
 		var err error
 		cfg, err = config.Load()
@@ -74,7 +73,7 @@ func runTUI() error {
 		}
 	}
 
-	return tui.Run(cfg)
+	return RunGuided(cfg)
 }
 
 // configCmd represents the config command

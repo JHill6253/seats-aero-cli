@@ -1,11 +1,11 @@
 # seats-aero-cli
 
-A command-line interface and terminal UI for searching award flight availability using the [seats.aero](https://seats.aero) API.
+A command-line interface for searching award flight availability using the [seats.aero](https://seats.aero) API.
 
 ## Features
 
-- **TUI Mode**: Interactive terminal UI with search form and results table
-- **CLI Mode**: Command-line interface for scripting and automation
+- **Interactive Mode**: Guided prompts for easy searching
+- **CLI Mode**: Command-line flags for scripting and automation
 - **Multiple Export Formats**: JSON and CSV output
 - **Cached Search**: Search for availability between specific airports and dates
 - **Bulk Availability**: Retrieve large amounts of availability data for a mileage program
@@ -62,26 +62,33 @@ preferred_airports:
 
 ## Usage
 
-### TUI Mode (Default)
+### Interactive Mode (Default)
 
-Launch the interactive terminal UI:
+Launch the interactive guided CLI:
 
 ```bash
 seats
 ```
 
-#### TUI Controls
+This will present a menu-driven interface:
 
-| Key | Action |
-|-----|--------|
-| `Tab` / `j` / `k` | Navigate form fields |
-| `Enter` | Submit search / select item |
-| `e` | Export results as JSON |
-| `c` | Export results as CSV |
-| `Esc` | Go back |
-| `q` / `Ctrl+C` | Quit |
+```
+seats.aero CLI
+Search for award flight availability
+
+? What would you like to do?
+  > Search for flights
+    View bulk availability
+    List routes
+    Get trip details
+    Exit
+```
+
+Follow the prompts to enter search criteria, view results, and export data.
 
 ### CLI Mode
+
+Use flags for scripting and automation:
 
 #### Search
 
