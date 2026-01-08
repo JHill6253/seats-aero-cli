@@ -194,4 +194,4 @@ MIT License - See [LICENSE](LICENSE) for details.
 
 ## Disclaimer
 
-This is an unofficial CLI tool. It is not affiliated with or endorsed by seats.aero. Use of the seats.aero API is subject to their [terms of service](https://seats.aero/terms).
+This is an unofficial CLI tool and is not sponsored, endorsed, or approved by the seats.aero team. This is just a personal project for fun. Use of the seats.aero API is subject to their [terms of service](https://seats.aero/terms).
