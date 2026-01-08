@@ -168,10 +168,10 @@ func runGuidedSearch(cfg *config.Config) error {
 				Title("Cabin class").
 				Options(
 					huh.NewOption("All cabins", ""),
-					huh.NewOption("Economy (Y)", "Y"),
-					huh.NewOption("Premium Economy (W)", "W"),
-					huh.NewOption("Business (J)", "J"),
-					huh.NewOption("First (F)", "F"),
+					huh.NewOption("Economy", "economy"),
+					huh.NewOption("Premium Economy", "premium"),
+					huh.NewOption("Business", "business"),
+					huh.NewOption("First", "first"),
 				).
 				Value(&cabin),
 
@@ -199,7 +199,7 @@ func runGuidedSearch(cfg *config.Config) error {
 		DestinationAirports: parseCSV(destination),
 		StartDate:           strings.TrimSpace(startDate),
 		EndDate:             strings.TrimSpace(endDate),
-		Cabin:               strings.ToUpper(strings.TrimSpace(cabin)),
+		Cabin:               strings.TrimSpace(cabin),
 		Sources:             parseCSVLower(source),
 	}
 
@@ -253,10 +253,10 @@ func runGuidedAvailability(cfg *config.Config) error {
 				Title("Cabin class").
 				Options(
 					huh.NewOption("All cabins", ""),
-					huh.NewOption("Economy (Y)", "Y"),
-					huh.NewOption("Premium Economy (W)", "W"),
-					huh.NewOption("Business (J)", "J"),
-					huh.NewOption("First (F)", "F"),
+					huh.NewOption("Economy", "economy"),
+					huh.NewOption("Premium Economy", "premium"),
+					huh.NewOption("Business", "business"),
+					huh.NewOption("First", "first"),
 				).
 				Value(&cabin),
 		),

@@ -42,7 +42,7 @@ func init() {
 	searchCmd.Flags().StringVar(&searchTo, "to", "", "Destination airport(s), comma-separated (required)")
 	searchCmd.Flags().StringVar(&searchStartDate, "start-date", "", "Start date (YYYY-MM-DD)")
 	searchCmd.Flags().StringVar(&searchEndDate, "end-date", "", "End date (YYYY-MM-DD)")
-	searchCmd.Flags().StringVar(&searchCabin, "cabin", "", "Cabin class: Y (economy), W (premium), J (business), F (first)")
+	searchCmd.Flags().StringVar(&searchCabin, "cabin", "", "Cabin class: Y/economy, W/premium, J/business, F/first")
 	searchCmd.Flags().StringVar(&searchSource, "source", "", "Mileage program source(s), comma-separated")
 	searchCmd.Flags().BoolVar(&searchDirect, "direct-only", false, "Only show direct flights")
 	searchCmd.Flags().StringVarP(&searchOutput, "output", "o", "table", "Output format: table, json, csv")
@@ -68,7 +68,7 @@ func runSearch(cmd *cobra.Command, args []string) error {
 		DestinationAirports: parseCSV(searchTo),
 		StartDate:           searchStartDate,
 		EndDate:             searchEndDate,
-		Cabin:               strings.ToUpper(searchCabin),
+		Cabin:               cabinCodeToName(strings.ToUpper(searchCabin)),
 		Sources:             parseCSV(searchSource),
 		DirectOnly:          searchDirect,
 	}
@@ -145,4 +145,25 @@ func formatCabinInfo(available bool, miles string, seats int) string {
 		return fmt.Sprintf("(%d)", seats)
 	}
 	return fmt.Sprintf("%sk", miles[:len(miles)-3])
+}
+
+// cabinCodeToName converts cabin codes (Y/W/J/F) to API names (economy/premium/business/first)
+// If already a valid name or empty, returns as-is (lowercased)
+func cabinCodeToName(code string) string {
+	code = strings.TrimSpace(code)
+	if code == "" {
+		return ""
+	}
+	switch strings.ToUpper(code) {
+	case "Y", "ECONOMY":
+		return "economy"
+	case "W", "PREMIUM":
+		return "premium"
+	case "J", "BUSINESS":
+		return "business"
+	case "F", "FIRST":
+		return "first"
+	default:
+		return strings.ToLower(code)
+	}
 }

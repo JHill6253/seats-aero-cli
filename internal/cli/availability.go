@@ -63,7 +63,7 @@ func runAvailability(cmd *cobra.Command, args []string) error {
 
 	params := api.AvailabilityParams{
 		Source:       strings.ToLower(availSource),
-		Cabin:        strings.ToUpper(availCabin),
+		Cabin:        cabinCodeToName(strings.ToUpper(availCabin)),
 		OriginRegion: availOriginRegion,
 		DestRegion:   availDestRegion,
 		StartDate:    availStartDate,
